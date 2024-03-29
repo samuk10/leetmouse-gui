@@ -1,3 +1,12 @@
+# TLDR:
+
+1. wget https://github.com/samuk10/leetmouse-gui/
+2. pip install virtualenv
+3. python3 -m venv venv
+4. source ./venv/bin/activate
+5. sudo pip install PySimpleGUIQt PySide6 
+6. sudo python3 main.py
+
 # leetmouse-gui
 Simple GUI for my fork of leetmouse ([https://github.com/samuk10/leetmouse](https://github.com/samuk10/leetmouse/)). This program assumes you've already installed the leetmouse driver.
 Please note it lacks form validation. All fields should be formatted as floats with an 'f' appended to the end, as in the example photo below.
