@@ -3,37 +3,23 @@ import os.path
 from ModuleParameter import ModuleParameter
 
 Parameters = {
+    "Scrolls per Tick": ModuleParameter("ScrollsPerTick"),
     "Acceleration": ModuleParameter("Acceleration"),
     "Sensitivity": ModuleParameter("Sensitivity"),
-    "Speed Cap": ModuleParameter("SpeedCap"),
     "Sensitivity Cap": ModuleParameter("SensitivityCap"),
+    "Speed Cap": ModuleParameter("SpeedCap"),
     "Offset": ModuleParameter("Offset"),
-    "Scrolls per Tick": ModuleParameter("ScrollsPerTick"),
-    "Midpoint": ModuleParameter("Midpoint")
-}
-
-Parameters["Exponent"] = ModuleParameter("Exponent")
-
-ModeLookup = {
-    "Linear": 1,
-    "Classic": 2,
-    "Motivity": 3
+    "PostScaleX": ModuleParameter("PostScaleX"),
+    "PostScaleY": ModuleParameter("PostScaleY"),
+    "PreScaleX": ModuleParameter("PreScaleX"),
+    "PreScaleY": ModuleParameter("PreScaleY"),
 }
 
 # Special cases
 UpdateParameter = ModuleParameter("update")
-AccelerationModeParameter = ModuleParameter("AccelerationMode")
-AccelerationMode = AccelerationModeParameter.parameterValue
-AccelerationModePlainText = "Linear"
 
-# get the acceleration mode to set the combo box
-for mode, key in ModeLookup.items():
-    if str(AccelerationMode) == str(key):
-        AccelerationModePlainText = mode
 
 layout = [[sg.Text("LEETMOUSE")]]
-layout.append([sg.Text("Mode: "),
-               sg.Combo(["Linear", "Classic", "Motivity"], default_value=AccelerationModePlainText, enable_events=True, key="modecombo")])
 
 for param in Parameters:
     layout.append([sg.Text(param), sg.InputText(default_text=Parameters[param].parameterValue, key=Parameters[param].parameterName)])
@@ -49,20 +35,11 @@ while True:
         # Update parameters
         for param in Parameters:
             Parameters[param].set(window[Parameters[param].parameterName].get())
-        AccelerationModeParameter.set(str(AccelerationMode))
 
         # Set update flag so LEETMOUSE knows to read changes
         UpdateParameter.set("1")
 
-    if event == "modecombo":
-        # Mode was changed
-        mode = values["modecombo"]
-        # Save change but don't write it yet
-        AccelerationMode = ModeLookup[mode]
-
     if event == sg.WIN_CLOSED:
         break
-
-
 
 window.close()
