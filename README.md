@@ -1,6 +1,6 @@
 # TLDR:
 
-1. wget https://github.com/samuk10/leetmouse-gui/
+1. git clone https://github.com/samuk10/leetmouse-gui/
 2. pip install virtualenv
 3. python3 -m venv venv
 4. source ./venv/bin/activate
